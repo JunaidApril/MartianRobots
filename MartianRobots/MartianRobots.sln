@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.Domain", "Mar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.Tests", "MartianRobots.Tests\MartianRobots.Tests.csproj", "{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.Application", "MartianRobots.Application\MartianRobots.Application.csproj", "{F04CFE80-863C-475B-BC98-7988322115C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F04CFE80-863C-475B-BC98-7988322115C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04CFE80-863C-475B-BC98-7988322115C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04CFE80-863C-475B-BC98-7988322115C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04CFE80-863C-475B-BC98-7988322115C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{BEAC25B8-4CB1-459D-972B-6C0BEFADE79D} = {A362B235-2F70-4824-89A0-668D41539C9C}
 		{ED060C2D-7467-468C-966C-9DA4FE532B22} = {0BAD02E4-D134-4D56-9CDA-D050A2BAC1D3}
 		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2} = {55E143EF-5AA6-4167-A99E-46C1B159CFDA}
+		{F04CFE80-863C-475B-BC98-7988322115C8} = {7C3A0624-6372-4C5B-8865-1F467141B043}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF5D99B3-27B8-453E-86D4-79983C48A56B}

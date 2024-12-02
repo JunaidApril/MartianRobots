@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MartianRobots.Domain\MartianRobots.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
