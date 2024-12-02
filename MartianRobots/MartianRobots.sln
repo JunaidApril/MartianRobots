@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots", "MartianRobots\MartianRobots.csproj", "{92D783DC-CFD4-4E74-A79C-9B586AE1BF9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A362B235-2F70-4824-89A0-668D41539C9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{55E143EF-5AA6-4167-A99E-46C1B159CFDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{0BAD02E4-D134-4D56-9CDA-D050A2BAC1D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7C3A0624-6372-4C5B-8865-1F467141B043}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{BEAC25B8-4CB1-459D-972B-6C0BEFADE79D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.Domain", "MartianRobots.Domain\MartianRobots.Domain.csproj", "{ED060C2D-7467-468C-966C-9DA4FE532B22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartianRobots.Tests", "MartianRobots.Tests\MartianRobots.Tests.csproj", "{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92D783DC-CFD4-4E74-A79C-9B586AE1BF9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D783DC-CFD4-4E74-A79C-9B586AE1BF9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D783DC-CFD4-4E74-A79C-9B586AE1BF9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D783DC-CFD4-4E74-A79C-9B586AE1BF9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED060C2D-7467-468C-966C-9DA4FE532B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED060C2D-7467-468C-966C-9DA4FE532B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED060C2D-7467-468C-966C-9DA4FE532B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED060C2D-7467-468C-966C-9DA4FE532B22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{92D783DC-CFD4-4E74-A79C-9B586AE1BF9F} = {BEAC25B8-4CB1-459D-972B-6C0BEFADE79D}
+		{0BAD02E4-D134-4D56-9CDA-D050A2BAC1D3} = {A362B235-2F70-4824-89A0-668D41539C9C}
+		{7C3A0624-6372-4C5B-8865-1F467141B043} = {A362B235-2F70-4824-89A0-668D41539C9C}
+		{BEAC25B8-4CB1-459D-972B-6C0BEFADE79D} = {A362B235-2F70-4824-89A0-668D41539C9C}
+		{ED060C2D-7467-468C-966C-9DA4FE532B22} = {0BAD02E4-D134-4D56-9CDA-D050A2BAC1D3}
+		{1D74B7F6-09F4-4FB1-A160-FA911993B1B2} = {55E143EF-5AA6-4167-A99E-46C1B159CFDA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF5D99B3-27B8-453E-86D4-79983C48A56B}
+	EndGlobalSection
+EndGlobal
