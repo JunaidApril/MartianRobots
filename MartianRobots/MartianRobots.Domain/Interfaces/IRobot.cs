@@ -14,7 +14,7 @@ namespace MartianRobots.Domain.Interfaces
         void MoveForward();
         Direction Direction { get; }
 
-        Coordinates CoOrdinates { get; }
+        Coordinates Coordinates { get; }
 
         bool IsLost { get; }
     }
