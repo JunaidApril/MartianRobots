@@ -3,17 +3,36 @@ using MartianRobots.Domain.Enums;
 using MartianRobots.Domain.Errors;
 using MartianRobots.Domain.Interfaces;
 using MartianRobots.Domain.ValueObjects;
+using Moq;
 
 namespace MartianRobots.Tests
 {
     public class RobotTests
     {
         private IRobot _robot;
+        private Mock<IMars> _marsMock;
+        private Coordinates _marsBoundaryCoordinates;
+        private Coordinates _robotCoordinates;
+
+        public RobotTests()
+        {
+            _marsBoundaryCoordinates = new Coordinates(25, 25);
+            _robotCoordinates = new Coordinates(10, 10);
+        }
 
         [SetUp]
         public void Setup()
         {
-            _robot = new Robot();
+            _marsMock = new Mock<IMars>();
+            _marsMock.Setup(m => m.BoundaryCoordinates).Returns(new Coordinates(_marsBoundaryCoordinates.X, _marsBoundaryCoordinates.Y));
+            // Mock in-bound check to simulate different conditions
+            _marsMock.Setup(m => m.IsRobotInbounds(It.IsAny<Coordinates>()))
+                .Returns((Coordinates coordinates) => coordinates.X >= 0 && coordinates.Y >= 0 && coordinates.X <= _marsBoundaryCoordinates.X && coordinates.Y <= _marsBoundaryCoordinates.Y);
+
+            _marsMock.Setup(m => m.ScentCoordinates)
+                .Returns(new List<Coordinates>());
+
+            _robot = new Robot(_marsMock.Object);
         }
 
         [TestCase(2, 4, Direction.N)]
@@ -114,6 +133,70 @@ namespace MartianRobots.Tests
             // Assert
             Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
             Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
+        }
+
+        [TestCase(2, 4, Direction.N, 3, 5, 2, 6)]
+        [TestCase(2, 4, Direction.E, 3, 5, 4, 4)]
+        [TestCase(1, 1, Direction.S, 2, 2, 1, -1)]
+        [TestCase(1, 3, Direction.W, 3, 4, -1, 3)]
+        public void MoveForward_ShouldMarkRobotAsLost_WhenExceedingBoundaries(int x, int y, Direction direction, int boundaryX, int boundaryY, int expectedX, int expectedY)
+        {
+            // Arrange
+            _marsBoundaryCoordinates = new Coordinates(boundaryX, boundaryY);
+            Setup();
+            _robot.Create(new Coordinates(x, y), direction);
+
+            // Act
+            _robot.MoveForward();
+            _robot.MoveForward();
+
+            // Assert
+            Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
+            Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
+            Assert.IsTrue(_robot.IsLost);
+        }
+
+        [TestCase(2, 4, Direction.E, 4, 4, 3, 4)]
+        [TestCase(1, 1, Direction.S, 1, -1, 1, 0)]
+        [TestCase(1, 3, Direction.W, -1, 3, 0, 3)]
+        public void MoveForward_ShouldAvoidLostPosition_WhenScentDetected(int x, int y, Direction direction, int scentX, int scentY, int expectedX, int expectedY)
+        {
+            // Arrange: Simulate a scent marker at the boundary
+            var scentCoordinate = new Coordinates(scentX, scentY);
+            _marsMock.Setup(m => m.ScentCoordinates).Returns(new List<Coordinates> { scentCoordinate });
+
+            _robot.Create(new Coordinates(x, y), direction);
+
+            // Act
+            _robot.MoveForward();
+            _robot.MoveForward();
+
+            // Assert
+            Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
+            Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
+            Assert.IsFalse(_robot.IsLost);
+        }
+
+        [TestCase(1, 1, Direction.E, 1, 1, Direction.E)]
+        public void ExecuteMultipleInstructions_ShouldMoveCorrectlyThroughSequence(int x, int y, Direction direction, int expectedX, int expectedY, Direction expectedDirection)
+        {
+            // Arrange: Initialize the robot at the given starting coordinates and direction
+            _robot.Create(new Coordinates(x, y), direction);
+
+            // Act: Perform a series of movements and turns
+            _robot.TurnRight(); // Turn the robot 90 degrees clockwise (to South)
+            _robot.MoveForward(); // Move forward, should move 1 step down (South)
+            _robot.TurnRight(); // Turn the robot 90 degrees clockwise (to West)
+            _robot.MoveForward(); // Move forward, should move 1 step down (West)
+            _robot.TurnRight(); // Turn the robot 90 degrees clockwise (to North)
+            _robot.MoveForward(); // Move forward, should move 1 step up (North)
+            _robot.TurnRight(); // Turn the robot 90 degrees clockwise (to East)
+            _robot.MoveForward(); // Move forward, should move 1 step right (East)
+
+            // Assert: Verify the robot's final position and direction
+            Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
+            Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
+            Assert.IsFalse(_robot.IsLost);
         }
     }
 }
