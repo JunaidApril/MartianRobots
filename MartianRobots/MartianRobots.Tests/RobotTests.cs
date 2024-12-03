@@ -13,11 +13,13 @@ namespace MartianRobots.Tests
         private Mock<IMars> _marsMock;
         private Coordinates _marsBoundaryCoordinates;
         private Coordinates _robotCoordinates;
+        private Direction _direction;
 
         public RobotTests()
         {
             _marsBoundaryCoordinates = new Coordinates(25, 25);
             _robotCoordinates = new Coordinates(10, 10);
+            _direction = Direction.N;
         }
 
         [SetUp]
@@ -32,7 +34,7 @@ namespace MartianRobots.Tests
             _marsMock.Setup(m => m.ScentCoordinates)
                 .Returns(new List<Coordinates>());
 
-            _robot = new Robot(_marsMock.Object);
+            _robot = new Robot(_robotCoordinates, _direction);
         }
 
         [TestCase(2, 4, Direction.N)]
@@ -47,10 +49,10 @@ namespace MartianRobots.Tests
             Assert.That(_robot.Coordinates.Y, Is.EqualTo(y));
         }
 
-        [TestCase(-5, 0, Direction.S, ErrorMessage.InvalidRobotStartingCoOrdinatesRange)]
-        [TestCase(2, -3, Direction.S, ErrorMessage.InvalidRobotStartingCoOrdinatesRange)]
-        [TestCase(51, 10, Direction.S, ErrorMessage.InvalidRobotStartingCoOrdinatesRange)]
-        [TestCase(10, 75, Direction.S, ErrorMessage.InvalidRobotStartingCoOrdinatesRange)]
+        [TestCase(-5, 0, Direction.S, ErrorMessage.InvalidRobotStartingCoordinatesRange)]
+        [TestCase(2, -3, Direction.S, ErrorMessage.InvalidRobotStartingCoordinatesRange)]
+        [TestCase(51, 10, Direction.S, ErrorMessage.InvalidRobotStartingCoordinatesRange)]
+        [TestCase(10, 75, Direction.S, ErrorMessage.InvalidRobotStartingCoordinatesRange)]
         public void CreateRobot_ShouldNotInitializeWithInvalidCoordinates(int x, int y, Direction direction, string expectedErrorMessage)
         {
             // Arrange
@@ -133,48 +135,6 @@ namespace MartianRobots.Tests
             // Assert
             Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
             Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
-        }
-
-        [TestCase(2, 4, Direction.N, 3, 5, 2, 6)]
-        [TestCase(2, 4, Direction.E, 3, 5, 4, 4)]
-        [TestCase(1, 1, Direction.S, 2, 2, 1, -1)]
-        [TestCase(1, 3, Direction.W, 3, 4, -1, 3)]
-        public void MoveForward_ShouldMarkRobotAsLost_WhenExceedingBoundaries(int x, int y, Direction direction, int boundaryX, int boundaryY, int expectedX, int expectedY)
-        {
-            // Arrange
-            _marsBoundaryCoordinates = new Coordinates(boundaryX, boundaryY);
-            Setup();
-            _robot.Create(new Coordinates(x, y), direction);
-
-            // Act
-            _robot.MoveForward();
-            _robot.MoveForward();
-
-            // Assert
-            Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
-            Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
-            Assert.IsTrue(_robot.IsLost);
-        }
-
-        [TestCase(2, 4, Direction.E, 4, 4, 3, 4)]
-        [TestCase(1, 1, Direction.S, 1, -1, 1, 0)]
-        [TestCase(1, 3, Direction.W, -1, 3, 0, 3)]
-        public void MoveForward_ShouldAvoidLostPosition_WhenScentDetected(int x, int y, Direction direction, int scentX, int scentY, int expectedX, int expectedY)
-        {
-            // Arrange: Simulate a scent marker at the boundary
-            var scentCoordinate = new Coordinates(scentX, scentY);
-            _marsMock.Setup(m => m.ScentCoordinates).Returns(new List<Coordinates> { scentCoordinate });
-
-            _robot.Create(new Coordinates(x, y), direction);
-
-            // Act
-            _robot.MoveForward();
-            _robot.MoveForward();
-
-            // Assert
-            Assert.That(_robot.Coordinates.X, Is.EqualTo(expectedX));
-            Assert.That(_robot.Coordinates.Y, Is.EqualTo(expectedY));
-            Assert.IsFalse(_robot.IsLost);
         }
 
         [TestCase(1, 1, Direction.E, 1, 1, Direction.E)]

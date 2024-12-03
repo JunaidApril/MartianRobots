@@ -7,26 +7,25 @@ namespace MartianRobots.Domain.Entities
 {
     public class Robot : IRobot
     {
-        private readonly IMars _mars;
         private int _xCoordinate;
         private int _yCoordinate;
         private Direction _direction;
 
-        public Robot(IMars mars) 
+        public Robot(Coordinates coOrdinates, Direction direction) 
         {
-            _mars = mars;
+            Create(coOrdinates, direction);
         }
 
         public Direction Direction => _direction;
 
         public Coordinates Coordinates => new Coordinates(_xCoordinate, _yCoordinate);
 
-        public bool IsLost { get; private set; }
+        public bool IsLost { get; set; }
 
         public void Create(Coordinates coordinates, Direction direction)
         {
             if (coordinates.X < 0 || coordinates.X > 50 || coordinates.Y < 0 || coordinates.Y > 50)
-                throw new ArgumentException(ErrorMessage.InvalidRobotStartingCoOrdinatesRange);
+                throw new ArgumentException(ErrorMessage.InvalidRobotStartingCoordinatesRange);
 
             _xCoordinate = coordinates.X;
             _yCoordinate = coordinates.Y;
@@ -37,16 +36,11 @@ namespace MartianRobots.Domain.Entities
         {
             var newCoordinates = GetNextCoordinates();
 
-            if (CheckForScents(newCoordinates.X, newCoordinates.Y))
-                return;
-
             _xCoordinate = newCoordinates.X;
             _yCoordinate = newCoordinates.Y;
-
-            CheckRobotLocation();
         }
 
-        private Coordinates GetNextCoordinates()
+        public Coordinates GetNextCoordinates()
         {
             return _direction switch
             {
@@ -80,22 +74,6 @@ namespace MartianRobots.Domain.Entities
                 Direction.W => Direction.N,
                 _ => throw new ArgumentException(ErrorMessage.InvalidDirection),
             };
-        }
-
-        private bool CheckForScents(int xCoOrdinate, int yCoOrdinate)
-        {
-            if (_mars.ScentCoordinates.Where(x => x.X == xCoOrdinate && x.Y == yCoOrdinate).Any())
-                return true;
-
-            return false;
-        }
-
-        private void CheckRobotLocation()
-        {
-            var inbounds = _mars.IsRobotInbounds(new Coordinates(_xCoordinate, _yCoordinate));
-
-            if (!inbounds)
-                IsLost = true;
         }
     }
 }

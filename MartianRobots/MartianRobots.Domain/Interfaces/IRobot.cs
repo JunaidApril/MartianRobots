@@ -16,6 +16,8 @@ namespace MartianRobots.Domain.Interfaces
 
         Coordinates Coordinates { get; }
 
-        bool IsLost { get; }
+        bool IsLost { get; set; }
+
+        Coordinates GetNextCoordinates();
     }
 }

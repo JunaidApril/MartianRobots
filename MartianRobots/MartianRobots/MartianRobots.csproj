@@ -7,4 +7,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MartianRobots.Application\MartianRobots.Application.csproj" />
+    <ProjectReference Include="..\MartianRobots.Domain\MartianRobots.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

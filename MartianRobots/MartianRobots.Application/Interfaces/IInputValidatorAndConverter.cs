@@ -7,7 +7,7 @@ namespace MartianRobots.Application.Interfaces
     {
         Coordinates ValidateAndConvertBoundaryCoordinates(string boundary);
 
-        (Coordinates, Direction) ValidateAndConvertStartingPosition(string startingPosition);
+        StartingPosition ValidateAndConvertStartingPosition(string startingPosition);
 
         IEnumerable<string> ValidateAndConvertInstructions(string instructions);
     }

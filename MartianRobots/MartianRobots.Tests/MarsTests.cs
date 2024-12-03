@@ -32,10 +32,10 @@ namespace MartianRobots.Tests
             Assert.That(_mars.BoundaryCoordinates.Y, Is.EqualTo(y));
         }
 
-        [TestCase(49, 51, ErrorMessage.InvalidBoundaryCoOrdinateRange)]
-        [TestCase(51, 49, ErrorMessage.InvalidBoundaryCoOrdinateRange)]
-        [TestCase(0, -1, ErrorMessage.InvalidBoundaryCoOrdinateRange)]
-        [TestCase(-1, 0, ErrorMessage.InvalidBoundaryCoOrdinateRange)]
+        [TestCase(49, 51, ErrorMessage.InvalidBoundaryCoordinateRange)]
+        [TestCase(51, 49, ErrorMessage.InvalidBoundaryCoordinateRange)]
+        [TestCase(0, -1, ErrorMessage.InvalidBoundaryCoordinateRange)]
+        [TestCase(-1, 0, ErrorMessage.InvalidBoundaryCoordinateRange)]
         public void CreateMars_ShouldNotInitializeWithInvalidBoundaryCoordinates_ShouldReturnErrorMessage(int x, int y, string errorMessage)
         {
             //Act

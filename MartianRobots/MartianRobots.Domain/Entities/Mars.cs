@@ -18,7 +18,7 @@ namespace MartianRobots.Domain.Entities
         public void Create(Coordinates coordinates)
         {
             if (coordinates.X < 0 || coordinates.X > 50 || coordinates.Y < 0 || coordinates.Y > 50)
-                throw new ArgumentException(ErrorMessage.InvalidBoundaryCoOrdinateRange);
+                throw new ArgumentException(ErrorMessage.InvalidBoundaryCoordinateRange);
 
             _boundaryCoordinates = coordinates;
         }

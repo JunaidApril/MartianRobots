@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MartianRobots.Application\MartianRobots.Application.csproj" />
     <ProjectReference Include="..\MartianRobots.Domain\MartianRobots.Domain.csproj" />
   </ItemGroup>
 
