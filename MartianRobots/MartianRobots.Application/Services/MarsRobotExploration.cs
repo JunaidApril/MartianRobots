@@ -68,7 +68,7 @@ namespace MartianRobots.Application.Services
             {
                 Console.WriteLine(ex.Message);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine(ErrorMessage.UserFriendlyForException);
             }
