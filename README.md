@@ -3,6 +3,7 @@
 Welcome to the Martian Robots Exploration! This application simulates the exploration of Mars by robotic vehicles, where the robots follow a set of instructions to explore a defined grid. The program accounts for the robot's boundaries, its movement, and whether it encounters any "scent marks" (indicating previous robots' lost positions).
 
 	## Tech Stack
+ 
 		.NET 8 : The application is built on .NET 8 to leverage modern C# features and performance improvements.
 		Dependency Injection (DI): The project uses DI for managing dependencies, promoting loose coupling and making it easier to test.
 		Unit Testing (NUnit): We use NUnit for unit testing, with mocking for interfaces to isolate the logic in tests.
