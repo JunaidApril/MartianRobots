@@ -11,10 +11,7 @@ namespace MartianRobots.Domain.Entities
         private int _yCoordinate;
         private Direction _direction;
 
-        public Robot(Coordinates coOrdinates, Direction direction) 
-        {
-            Create(coOrdinates, direction);
-        }
+        public Robot() {}
 
         public Direction Direction => _direction;
 
@@ -30,6 +27,7 @@ namespace MartianRobots.Domain.Entities
             _xCoordinate = coordinates.X;
             _yCoordinate = coordinates.Y;
             _direction = direction;
+            IsLost = false;
         }
 
         public void MoveForward()

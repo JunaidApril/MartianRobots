@@ -34,7 +34,9 @@ namespace MartianRobots.Tests
             _marsMock.Setup(m => m.ScentCoordinates)
                 .Returns(new List<Coordinates>());
 
-            _robot = new Robot(_robotCoordinates, _direction);
+            _robot = new Robot();
+
+            _robot.Create(_robotCoordinates, _direction);
         }
 
         [TestCase(2, 4, Direction.N)]

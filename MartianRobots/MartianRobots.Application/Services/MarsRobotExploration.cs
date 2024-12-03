@@ -1,5 +1,4 @@
 ﻿using MartianRobots.Application.Interfaces;
-using MartianRobots.Domain.Entities;
 using MartianRobots.Domain.Enums;
 using MartianRobots.Domain.Errors;
 using MartianRobots.Domain.Interfaces;
@@ -13,10 +12,11 @@ namespace MartianRobots.Application.Services
         private IRobot _robot;
         private List<string> _martianRobotsOutcome = new List<string>();
 
-        public MarsRobotExploration(IMars mars, IInputValidatorAndConverter inputValidator)
+        public MarsRobotExploration(IMars mars, IInputValidatorAndConverter inputValidator, IRobot robot)
         {
             _inputConverterAndValidator = inputValidator;
             _mars = mars;
+            _robot = robot;
         }
 
         public void StartExploration(string inputs)
@@ -82,7 +82,7 @@ namespace MartianRobots.Application.Services
         private void CreateRobot(string input)
         {
             var startingPositionConverted = _inputConverterAndValidator.ValidateAndConvertStartingPosition(input);
-            _robot = new Robot(startingPositionConverted.Coordinates, startingPositionConverted.Direction);
+            _robot.Create(startingPositionConverted.Coordinates, startingPositionConverted.Direction);
         }
 
         private void InstructRobot(IEnumerable<string> instructionsArray)

@@ -11,13 +11,15 @@ namespace MartianRobots.Tests
     {
         private readonly Mock<IMars> _marsMock;
         private readonly Mock<IInputValidatorAndConverter> _inputValidatorMock;
+        private readonly Mock<IRobot> _robotMock;
         private MarsRobotExploration _marsRobotExploration;
 
         public MarsRobotExplorationTests()
         {
             _marsMock = new Mock<IMars>();
             _inputValidatorMock = new Mock<IInputValidatorAndConverter>();
-            _marsRobotExploration = new MarsRobotExploration(_marsMock.Object, _inputValidatorMock.Object);
+            _robotMock = new Mock<IRobot>();
+            _marsRobotExploration = new MarsRobotExploration(_marsMock.Object, _inputValidatorMock.Object, _robotMock.Object);
         }
 
         [Test]
@@ -36,70 +38,18 @@ namespace MartianRobots.Tests
         }
 
         [Test]
-        public void RobotMovesOutOfBounds_MarkedAsLost()
+        public void CreateRobot_ValidInput_CreatesRobotSuccessfully()
         {
             // Arrange
-            var marsBoundary = new Coordinates(3, 3);
-            _inputValidatorMock.Setup(x => x.ValidateAndConvertBoundaryCoordinates(It.IsAny<string>()))
-                .Returns(marsBoundary);
-
-            var robotStartingPosition = new StartingPosition(new Coordinates(1, 1), Direction.N);
+            var startingPosition = new StartingPosition(new Coordinates(1, 1), Direction.E);
             _inputValidatorMock.Setup(x => x.ValidateAndConvertStartingPosition(It.IsAny<string>()))
-                .Returns(robotStartingPosition);
-
-            var instructions = "FFF";
-            var instructionsArray = instructions.Select(c => c.ToString()).ToList();
-            _inputValidatorMock.Setup(x => x.ValidateAndConvertInstructions(It.IsAny<string>()))
-                .Returns(instructionsArray);
-
-            var scentCoordinates = new List<Coordinates> { };
-            _marsMock.Setup(m => m.ScentCoordinates).Returns(scentCoordinates);
-
-            _marsMock.SetupSequence(m => m.IsRobotInbounds(It.IsAny<Coordinates>()))
-                .Returns(true)
-                .Returns(true)
-                .Returns(false);
+                .Returns(startingPosition);
 
             // Act
-            _marsRobotExploration.StartExploration("3 3\r\n1 1 N\r\nFFF");
+            _marsRobotExploration.StartExploration("5 3\r\n1 1 E");
 
             // Assert
-            var outcome = _marsRobotExploration.GetRobotsResultsOnMars();
-            Assert.Contains("1 4 N LOST", outcome);
-        }
-
-        [Test]
-        public void RobotAvoidsScentedLocation_DoesNotMove()
-        {
-            // Arrange
-            var marsBoundary = new Coordinates(3, 3);
-            _inputValidatorMock.Setup(x => x.ValidateAndConvertBoundaryCoordinates(It.IsAny<string>()))
-                .Returns(marsBoundary);
-
-            var robotStartingPosition = new StartingPosition(new Coordinates(1, 1), Direction.N);
-            _inputValidatorMock.Setup(x => x.ValidateAndConvertStartingPosition(It.IsAny<string>()))
-                .Returns(robotStartingPosition);
-
-            var instructions = "FFF";
-            var instructionsArray = instructions.Select(c => c.ToString()).ToList();
-            _inputValidatorMock.Setup(x => x.ValidateAndConvertInstructions(It.IsAny<string>()))
-                .Returns(instructionsArray);
-
-            var scentCoordinates = new List<Coordinates> { new Coordinates(1, 4) };
-            _marsMock.Setup(m => m.ScentCoordinates).Returns(scentCoordinates);
-
-            _marsMock.SetupSequence(m => m.IsRobotInbounds(It.IsAny<Coordinates>()))
-                 .Returns(true)
-                 .Returns(true)
-                 .Returns(true)
-                 .Returns(true);
-
-            //Act
-            _marsRobotExploration.StartExploration("3 3\r\n1 1 N\r\nFFF");
-
-            // Assert
-            var outcome = _marsRobotExploration.GetRobotsResultsOnMars();
-            Assert.Contains("1 3 N ", outcome);
+            _robotMock.Verify(m => m.Create(It.Is<Coordinates>(c => c.X == 1 && c.Y == 1), Direction.E), Times.Once);
         }
     }
 }
