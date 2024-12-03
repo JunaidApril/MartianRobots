@@ -19,7 +19,9 @@ Welcome to the Martian Robots Exploration! This application simulates the explor
 
 			Clone the repository: git clone https://github.com/your-repo/martian-robots.git
 			
-			Run the application: To start the program and simulate the Mars exploration
+			Run the application: 
+   
+   				To start the program and simulate the Mars exploration
 				In the program.cs file - you will find a method GetSampleInput() which returns an input string
 				Replace this value for different input tests
 				
