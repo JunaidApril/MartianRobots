@@ -116,3 +116,12 @@ Welcome to the Martian Robots Exploration! This application simulates the explor
 		This project implements a simulation for Mars robot exploration using Clean Architecture principles. 
 		The use of Dependency Injection, Unit testing, and Mocking ensures that the application is maintainable, testable, and easy to scale. 
 		With a simple yet effective user interface, the application can be easily extended to support more advanced features in the future.	
+
+
+# Next steps I did not manage to find time to do:
+
+	Add logging
+	Add more unit tests for MarsRobotExplorationTests.cs
+	Improve the UI - Create a front web front end where a user can input the data in textboxes according to Mars boundary, list of Robots with starting positions and instructions. For the console app - add ability to paste input sample data instead of adding it in program.cs 
+ 	Add configuration file - for values of the max co-ordiante range of 50 or the max input character string of 100 etc
+
