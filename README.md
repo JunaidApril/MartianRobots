@@ -11,6 +11,7 @@ Welcome to the Martian Robots Exploration! This application simulates the explor
 	## Running Instructions
 
 		### Prerequisites
+  
 			.NET SDK: You need to have the .NET SDK installed on your machine to run the application.
 			Install .NET from the official website: Download .NET SDK
 			
@@ -23,6 +24,7 @@ Welcome to the Martian Robots Exploration! This application simulates the explor
 				Replace this value for different input tests
 				
 		### Sample Input
+  
 			The input should be in the following format:
 			
 				5 3
