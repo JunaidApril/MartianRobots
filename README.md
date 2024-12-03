@@ -6,7 +6,7 @@ Welcome to the Martian Robots Exploration! This application simulates the explor
  
 		.NET 8 : The application is built on .NET 8 to leverage modern C# features and performance improvements.
 		Dependency Injection (DI): The project uses DI for managing dependencies, promoting loose coupling and making it easier to test.
-		Unit Testing (NUnit): We use NUnit for unit testing, with mocking for interfaces to isolate the logic in tests.
+		Unit Testing (NUnit): I used NUnit for unit testing, with mocking for interfaces to isolate the logic in tests.
 
 	## Running Instructions
 
@@ -85,7 +85,7 @@ Welcome to the Martian Robots Exploration! This application simulates the explor
 	## Technical Choices
 	
 		### Why Clean Architecture?
-			We chose Clean Architecture because it provides several key benefits:
+			I chose Clean Architecture because it provides several key benefits:
 
 			#### Separation of Concerns: 
 				It clearly separates business logic, data access, and user interface concerns. This makes it easier to test and maintain.
