@@ -32,7 +32,7 @@ namespace MartianRobots.Tests
                 .Returns((Coordinates coordinates) => coordinates.X >= 0 && coordinates.Y >= 0 && coordinates.X <= _marsBoundaryCoordinates.X && coordinates.Y <= _marsBoundaryCoordinates.Y);
 
             _marsMock.Setup(m => m.ScentCoordinates)
-                .Returns(new List<Coordinates>());
+                .Returns(new HashSet<Coordinates>());
 
             _robot = new Robot();
 

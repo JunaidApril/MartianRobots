@@ -42,6 +42,6 @@ namespace MartianRobots.Domain.Interfaces
         /// A list of <see cref="Coordinates"/> objects representing the positions where robots were lost.
         /// Future robots will avoid moving off the grid at these positions.
         /// </value>
-        List<Coordinates> ScentCoordinates { get; }
+        HashSet<Coordinates> ScentCoordinates { get; }
     }
 }

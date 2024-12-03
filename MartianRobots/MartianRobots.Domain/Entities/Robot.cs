@@ -10,6 +10,8 @@ namespace MartianRobots.Domain.Entities
         private int _xCoordinate;
         private int _yCoordinate;
         private Direction _direction;
+        private const int MaxCoordinateLimit = 50;
+        private const int MinCoordinateLimit = 0;
 
         public Robot() {}
 
@@ -21,7 +23,7 @@ namespace MartianRobots.Domain.Entities
 
         public void Create(Coordinates coordinates, Direction direction)
         {
-            if (coordinates.X < 0 || coordinates.X > 50 || coordinates.Y < 0 || coordinates.Y > 50)
+            if (coordinates.X < MinCoordinateLimit || coordinates.X > MaxCoordinateLimit || coordinates.Y < MinCoordinateLimit || coordinates.Y > MaxCoordinateLimit)
                 throw new ArgumentException(ErrorMessage.InvalidRobotStartingCoordinatesRange);
 
             _xCoordinate = coordinates.X;
